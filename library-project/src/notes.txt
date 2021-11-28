@@ -1,0 +1,8 @@
+//create book loan
+insert into book_loans (loan_id,isbn,card_id,date_out,due_date) select 1,Isbn,1,'2021-11-28','2021-12-02' from book where title='Brave New World' limit 1;
+
+//sum all fines grouped by the card_id
+select book_loans.card_id, SUM(fines.fine_amt) from book_loans LEFT JOIN fines ON fines.loan_id WHERE fines.paid=false GROUP BY book_loans.card_id;
+
+//create fine
+insert into fines (loan_id, fine_amt, paid) select loan_id, 1, false from book_loans limit 1;

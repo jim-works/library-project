@@ -2,10 +2,11 @@ import { React, useState } from 'react';
 import './App.css';
 import BookPage from './BookPage';
 import Borrowers from './Borrowers';
+import CheckIn from './CheckIn';
 import Fines from './Fines';
 
 function App() {
-    const [rendering, setRendering] = useState('BookPage');
+    const [rendering, setRendering] = useState('Books');
 
     if (rendering === 'Books') {
         return <>
@@ -22,6 +23,7 @@ function App() {
                 <button className="btn" onClick={() => setRendering('Books')}>Books</button>
             </div>
             <Borrowers />
+            <CheckIn />
         </>
     } else {
         //fines
