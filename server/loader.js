@@ -60,7 +60,7 @@ const format_borrower = (borrower) => {
 }
 
 const load_borrowers = (path) => {
-    const borrowers = readCSV(path, ['id', 'ssn', 'first_name', 'last_name', 'email', 'address', 'city', 'state', 'phone']);
+    const borrowers = readCSV(path, ['Card_id', 'Ssn', 'First_name', 'Bname', 'Email', 'Address', 'City', 'State', 'Phone']);
     const borrowers_query_base = createWildcardInsertQuery("borrower", borrowers[0]);
     borrowers.forEach((elem) => {
         let formatted = format_borrower(elem);
@@ -76,7 +76,7 @@ const format_book = (book) => {
 }
 
 const load_books = (path) => {
-    const books = readCSV(path, ['isbn10', 'isbn13', 'title', 'author', 'cover', 'publisher', 'pages'], sep = '\t');
+    const books = readCSV(path, ['Isbn', 'Isbn13', 'Title', 'Author', 'Cover', 'Publisher', 'Pages'], sep = '\t');
     const book_wildcard_query = createWildcardInsertQuery("book", books[0]);
     books.forEach((elem) => {
         let formatted = format_book(elem);

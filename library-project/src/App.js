@@ -1,35 +1,39 @@
 import { React, useState } from 'react';
 import './App.css';
-import Book from './Book'
-var mysql = require('mysql');
+import BookPage from './BookPage';
+import Borrowers from './Borrowers';
+import Fines from './Fines';
 
 function App() {
+    const [rendering, setRendering] = useState('BookPage');
 
-
-    const [query, setQuery] = useState('select * from book limit 10;');
-    const [results, setResults] = useState([]);
-    const getResults = () => {
-        fetch("/api/" + query)
-            .then(result => result.json())
-            .then(result => setResults(result));
-    };
-
-    return (
-        <div className="app">
+    if (rendering === 'Books') {
+        return <>
             <div className="bookinput">
-                <h1>SQL Query Runner</h1>
-                <input className="input-wide" value={query} onChange={e => setQuery(e.target.value)} />
-                <button className="btn" onClick={getResults}>Execute Query</button>
+                <button className="btn" onClick={() => setRendering('Borrowers')}>Borrowers</button>
+                <button className="btn" onClick={() => setRendering('Fines')}>Fines</button>
             </div>
-            <div>
-                <section className='booklist'>
-                    {results.map((row) =>
-                        <Book {...row} />
-                    )}
-                </section>
+            <BookPage />
+        </>
+    } else if (rendering === 'Borrowers') {
+        return <>
+            <div className="bookinput">
+                <button className="btn" onClick={() => setRendering('Fines')}>Fines</button>
+                <button className="btn" onClick={() => setRendering('Books')}>Books</button>
             </div>
-        </div>
-    );
+            <Borrowers />
+        </>
+    } else {
+        //fines
+        return <>
+            <div className="bookinput">
+                <button className="btn" onClick={() => setRendering('Books')}>Books</button>
+                <button className="btn" onClick={() => setRendering('Borrowers')}>Borrowers</button>
+            </div>
+            <Fines />
+        </>
+    }
+
 }
 
 export default App;

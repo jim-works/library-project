@@ -8,7 +8,7 @@ How to run:
 	b) run "node server/loader.js"
 3. run node backend:
 	"cd server"
-	"npm start"
+	"node index.js"
 4. in a separate terminal, run frontend:
 	"cd library-project"
 	"npm start"

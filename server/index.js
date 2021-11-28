@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql')
 
 const app = express();
+app.use(express.json());
 const port = 3001;
 var connected = false;
 
@@ -18,7 +19,7 @@ con.connect((err) => {
 
 });
 
-app.get('/api/:query', (req, res) => {
+app.get('/api/query/:query', (req, res) => {
     if (!connected) { res.status(500).send("not yet connected, try refreshing!"); return; }
 
     con.query(req.params.query, (err, result) => {
@@ -28,6 +29,11 @@ app.get('/api/:query', (req, res) => {
         };
         res.send(result);
     });
+})
+
+app.post('/api/createBorrower', (req, res) => {
+    if (!connected) { res.status(500).send("not yet connected, try refreshing!"); return; }
+    res.status(201).json(req.body);
 })
 
 app.listen(port, () => {
