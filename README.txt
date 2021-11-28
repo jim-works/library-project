@@ -2,7 +2,7 @@ Dependencies: node.js, mysql
 
 How to run:
 
-1. startup mysql server (mysqld --console)
+1. startup mysql server (in admin command prompt: mysqld --console)
 2. initialize tables if needed:
 	a) execute create-tables.sql
 	b) run "node server/loader.js"
