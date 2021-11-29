@@ -1,5 +1,4 @@
 import { React, useState } from 'react';
-import Borrower from './Borrower'
 
 function Borrowers() {
     const [borrower, setBorrower] = useState({ First_name: '', Bname: '', Ssn: '', Address: '', Email: '', City: '', State: '', Phone: '' });

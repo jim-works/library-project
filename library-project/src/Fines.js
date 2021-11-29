@@ -4,6 +4,7 @@ import Fine from './Fine'
 function Fines() {
     const showOnlyPaidQuery = 'select book_loans.card_id, SUM(fines.fine_amt) as Fine_amt from book_loans LEFT JOIN fines ON fines.loan_id WHERE fines.paid=true GROUP BY book_loans.card_id;';
     const showOnlyUnpaidQuery = 'select book_loans.card_id, SUM(fines.fine_amt) as Fine_amt from book_loans LEFT JOIN fines ON fines.loan_id WHERE fines.paid = false GROUP BY book_loans.card_id';
+    const updateUnpaidQuery = 'UPDATE FINES SET Fine_amt = Fine_amt+0.25 WHERE Paid=false';
     const [checked, setChecked] = useState(true);
     const [results, setResults] = useState([]);
     const getResults = () => {
@@ -13,7 +14,10 @@ function Fines() {
             .then(result => setResults(result));
     };
     const updateFines = () => {
-        alert("fines updated!");
+        /*fetch("/api/query/" + updateUnpaidQuery)
+            .then(result => result.json())
+            .then(result => setResults(result));*/
+        alert('fines updated!');
     };
 
     return (

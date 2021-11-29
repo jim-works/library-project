@@ -2,12 +2,13 @@ import { React, useState } from 'react';
 import Book from './Book'
 
 function BookPage() {
-
-
-    const [query, setQuery] = useState('select * from book limit 10;');
+    const createQuery = (searchString) => {
+        return 'SELECT * FROM book WHERE ISBN LIKE "%25' + searchString + '%25" OR isbn13 LIKE "%25' + searchString + '%25" OR title LIKE "%25' + searchString + '%25" OR author LIKE "%25' + searchString + '%25";';
+    }
+    const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
     const getResults = () => {
-        fetch("/api/query/" + query)
+        fetch("/api/query/" + createQuery(query))
             .then(result => result.json())
             .then(result => setResults(result));
     };

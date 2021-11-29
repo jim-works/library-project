@@ -25,7 +25,7 @@ app.get('/api/query/:query', (req, res) => {
     con.query(req.params.query, (err, result) => {
         if (err) {
             console.log(err);
-            return;
+            res.status(400).send("Bad sql query");
         };
         res.send(result);
     });
