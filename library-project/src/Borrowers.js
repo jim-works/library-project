@@ -14,10 +14,16 @@ function Borrowers() {
         };
         fetch('/api/createBorrower', requestOptions)
             .then(response => {
-                if (response.status !== 201) {
-                    alert("Error creating borrower!");
-                } else {
-                    response.text().then(value => console.log(value));
+                switch (response.status) {
+                    case 201:
+                        alert("Successfully created borrower!");
+                        break;
+                    case 400:
+                        alert("Can't create a borrower with a non-unique SSN!");
+                        break;
+                    default:
+                        alert("Error creating borrower");
+                        break;
                 }
             })
     };

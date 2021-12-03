@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import Loan from './Loan'
 
 function CheckIn() {
@@ -19,6 +19,10 @@ function CheckIn() {
             })
             .then(result => setResults(result));
     };
+
+    useEffect(() => {
+        getResults();
+    });
 
     return (
         <div className="app">
